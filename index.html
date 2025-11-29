@@ -97,17 +97,28 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden">
+    <!-- pt-24 (мобилка): отступ сверху меньше, items-start (мобилка): прижимаем к верху -->
+    <!-- md:items-center (десктоп): центрируем по вертикали -->
+    <section class="relative min-h-screen flex items-start md:items-center justify-center px-4 pt-24 md:pt-20 overflow-hidden">
         
         <!-- Decorative Circles -->
         <div class="absolute right-0 top-20 w-64 h-64 border border-black rounded-full opacity-20 animate-spin-slow border-dashed"></div>
         <div class="absolute left-10 bottom-20 w-32 h-32 border-2 border-retroOrange rounded-full opacity-50"></div>
 
+        <!-- 🔥 ОТДЕЛЬНЫЙ БЛОК СТАТУСА (Висит поверх всего) 🔥 -->
+        <div class="absolute top-20 right-4 md:top-32 md:right-10 bg-black border-2 border-retroTeal px-3 py-2 z-50 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+            <div class="flex items-center gap-3">
+                <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div id="statusText" class="font-mono text-xs text-retroTeal font-bold tracking-widest" data-text="STATUS: OFFLINE">
+                    > BOOT...
+                </div>
+            </div>
+        </div>
+
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative">
             
             <!-- Text Content -->
-            <!-- На мобилке: z-20 (лежит поверх картинки) -->
-            <div class="order-1 md:order-1 relative z-20 mt-12 md:mt-0">
+            <div class="order-1 md:order-1 relative z-20">
                 <div class="font-mono text-retroOrange text-sm mb-4 uppercase tracking-widest border-l-4 border-black pl-3">
                     // Protocol: Anonymous
                 </div>
@@ -116,7 +127,8 @@
                     ESIM —<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-retroOrange to-retroTeal" style="-webkit-text-stroke: 2px black;">WILL TRAVEL</span>
                 </h1>
-                <p class="font-mono text-gray-800 font-bold md:font-normal md:text-gray-600 mb-8 max-w-md leading-relaxed bg-vintageWhite/60 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none rounded">
+                <!-- Убрали background blur, теперь текст чистый -->
+                <p class="font-mono text-gray-800 md:text-gray-600 mb-8 max-w-md leading-relaxed font-medium md:font-normal">
                     Connect to the global grid. No KYC. No Trace. 
                     Pure data transmission via encrypted channels.
                 </p>
@@ -125,22 +137,24 @@
                     <a href="#plans" class="btn-retro btn-retro-primary px-8 py-4 text-center shadow-xl">
                         Initialize eSIM
                     </a>
-                    <a href="#features" class="btn-retro px-8 py-4 text-center flex items-center justify-center gap-3 bg-white/90 md:bg-transparent">
+                    <a href="#features" class="btn-retro px-8 py-4 text-center flex items-center justify-center gap-3 bg-white/50 md:bg-transparent">
                         <i class="fab fa-bitcoin"></i> Pay Crypto
                     </a>
                 </div>
             </div>
 
             <!-- Visual Content -->
-            <!-- 
-               MOBILE: Absolute, Top Right, z-0 (под текстом), без рамок.
-               DESKTOP: Relative, Grid column, z-10, с рамками, с анимацией.
-            -->
-            <div class="absolute top-20 -right-4 w-[70%] opacity-90 md:opacity-100 md:static md:w-full md:h-auto z-0 md:z-10 md:order-2 md:animate-float group">
+            <!-- МОБИЛКА: Картинка на фоне, прозрачная, без рамок -->
+            <!-- ДЕСКТОП: Блок справа, рамки, матрица, float -->
+            <div class="absolute top-0 -right-10 w-[80%] opacity-20 grayscale md:grayscale-0 md:opacity-100 md:static md:w-full md:h-auto z-0 md:z-10 md:order-2 md:animate-float group">
                 
-                <!-- Обертка с рамками (Только для Desktop 'md:') -->
-                <div class="relative border-none md:border-2 md:border-black bg-transparent md:bg-white p-0 md:p-2 overflow-hidden h-full md:h-[500px] flex items-center justify-center">
+                <!-- Обертка (Рамки только на md:) -->
+                <div class="relative border-none md:border-2 md:border-black bg-transparent md:bg-white p-0 md:p-2 overflow-hidden h-full md:h-[500px] flex items-center justify-center relative">
                     
+                    <!-- Tech Frames behind image (Только Desktop) -->
+                    <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10 hidden md:block"></div>
+                    <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed hidden md:block"></div>
+
                     <!-- DATA RAIN (Только Desktop) -->
                     <div class="absolute inset-0 z-0 font-mono text-[10px] leading-tight text-gray-400/50 overflow-hidden hidden md:flex justify-between px-2 pointer-events-none select-none">
                         <div id="col1" class="w-[30%] break-all opacity-60"></div>
@@ -149,18 +163,8 @@
                     </div>
 
                     <!-- КАРТИНКА (Simphone) -->
-                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover drop-shadow-2xl">
+                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover drop-shadow-2xl mix-blend-multiply md:mix-blend-normal">
                     
-                    <!-- Терминал статуса -->
-                    <!-- На мобилке висит на картинке, но чуть компактнее -->
-                    <div class="absolute bottom-10 right-0 md:bottom-4 md:right-4 bg-black border border-retroTeal px-2 md:px-3 py-1 z-20 shadow-lg transform scale-75 md:scale-100 origin-bottom-right">
-                        <div class="flex items-center gap-2">
-                            <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full"></div>
-                            <div id="statusText" class="font-mono text-xs text-retroTeal font-bold tracking-wider" data-text="STATUS: OFFLINE">
-                                > BOOT...
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
