@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERACTIVE TEST PROTOCOL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { background-color: #F2F2F0; font-family: 'Space Mono', monospace; overflow: hidden; }
+        
+        /* Анимация тряски при клике */
+        .shake-hard { animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both; transform: translate3d(0, 0, 0); backface-visibility: hidden; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        /* Глитч текста */
+        .glitch-mode {
+            color: red !important;
+            text-shadow: 2px 0 blue, -2px 0 yellow;
+            animation: glitch-skew 0.3s infinite;
+        }
+        @keyframes glitch-skew {
+            0% { transform: translate(0) }
+            20% { transform: translate(-5px, 5px) }
+            40% { transform: translate(-5px, -5px) }
+            60% { transform: translate(5px, 5px) }
+            80% { transform: translate(5px, -5px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Зона клика (для отладки пока красная, потом сделаем прозрачной) */
+        .click-zone {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.3); /* ПОТОМ ПОСТАВИШЬ 0.0 */
+            cursor: pointer;
+            z-index: 50;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .click-zone:hover { background: rgba(255, 0, 0, 0.5); }
+        .click-zone:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen w-screen">
+
+    <!-- Контейнер устройства -->
+    <div class="relative w-[400px] md:w-[500px]">
+        
+        <!-- 1. Само устройство -->
+        <img id="deviceImg" src="assets/images/simphone.png" alt="Device" class="w-full h-auto drop-shadow-2xl relative z-10 transition-transform duration-100">
+
+        <!-- 2. НЕВИДИМАЯ КНОПКА (Настрой позицию тут!) -->
+        <!-- top: отступ сверху %, left: отступ слева %, width/height: размер -->
+        <div id="switchBtn" class="click-zone" 
+             style="top: 62%; left: 27%; width: 12%; height: 10%;">
+        </div>
+
+        <!-- 3. Статус -->
+        <div class="absolute bottom-10 right-0 bg-black border-2 border-[#00ff88] px-4 py-2 z-20 shadow-lg">
+            <div class="flex items-center gap-3">
+                <div id="led" class="w-3 h-3 bg-red-600 rounded-full transition-colors duration-300"></div>
+                <div id="statusText" class="text-[#00ff88] text-sm font-bold tracking-widest">
+                    OFFLINE
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Звук переключателя -->
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
+    <script>
+        const btn = document.getElementById('switchBtn');
+        const device = document.getElementById('deviceImg');
+        const statusText = document.getElementById('statusText');
+        const led = document.getElementById('led');
+        const audio = document.getElementById('clickSound');
+        
+        let isOnline = false;
+
+        btn.addEventListener('click', () => {
+            // 1. Звук
+            audio.currentTime = 0;
+            audio.play();
+
+            // 2. Тряска устройства (Haptic feedback)
+            device.classList.add('shake-hard');
+            setTimeout(() => device.classList.remove('shake-hard'), 200);
+
+            // 3. Логика переключения
+            isOnline = !isOnline;
+
+            if (isOnline) {
+                // Включаем: Сначала глитч, потом онлайн
+                statusText.innerText = "INITIALIZING...";
+                statusText.classList.add('glitch-mode');
+                
+                setTimeout(() => {
+                    statusText.classList.remove('glitch-mode');
+                    statusText.innerText = "SYSTEM: ONLINE";
+                    statusText.style.color = "#00ff88";
+                    led.classList.remove('bg-red-600');
+                    led.classList.add('bg-green-500', 'animate-pulse', 'shadow-[0_0_10px_#00ff00]');
+                }, 800); // Глитч длится 0.8 сек
+
+            } else {
+                // Выключаем
+                statusText.innerText = "DISCONNECTING...";
+                statusText.style.color = "red";
+                
+                setTimeout(() => {
+                    statusText.innerText = "OFFLINE";
+                    led.classList.remove('bg-green-500', 'animate-pulse', 'shadow-[0_0_10px_#00ff00]');
+                    led.classList.add('bg-red-600');
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
