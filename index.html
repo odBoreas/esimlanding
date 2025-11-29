@@ -213,22 +213,28 @@
                 </div>
             </div>
 
-            <!-- Visual Content (With Simphone & Animations) -->
+                 <!-- Visual Content -->
             <div class="order-1 md:order-2 relative animate-float group">
                 <!-- Tech Frames behind image -->
                 <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10"></div>
                 <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed"></div>
 
                 <!-- Image Container -->
-                <div class="relative z-10 border-2 border-black bg-white p-2 overflow-hidden">
+                <div class="relative z-10 border-2 border-black bg-black p-2 overflow-hidden h-[500px] flex items-center justify-center">
                     
-                    <!-- ЭФФЕКТ 1: Сканирующий луч на фоне -->
-                    <div class="absolute inset-0 pointer-events-none z-0 opacity-20">
-                        <div class="w-full h-[2px] bg-retroTeal shadow-[0_0_15px_rgba(0,128,128,1)] animate-scan"></div>
+                    <!-- 🔥 ЭФФЕКТ: DATA RAIN TERMINAL (ФОН) -->
+                    <div class="absolute inset-0 z-0 opacity-40 font-mono text-[10px] leading-tight text-green-500 overflow-hidden flex justify-between px-2 pointer-events-none">
+                        <!-- Колонки кода, которые заполнятся скриптом -->
+                        <div id="col1" class="w-[30%] break-all opacity-50"></div>
+                        <div id="col2" class="w-[30%] break-all font-bold text-retroTeal"></div>
+                        <div id="col3" class="w-[30%] break-all opacity-50"></div>
                     </div>
+                    
+                    <!-- ВИНЬЕТКА (Затемнение по краям для глубины) -->
+                    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle,transparent_40%,#000_100%)]"></div>
 
                     <!-- КАРТИНКА (Simphone) -->
-                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-normal">
+                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-normal drop-shadow-2xl">
                     
                     <!-- ЭФФЕКТ 2: Живой терминал статуса -->
                     <div class="absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-lg">
@@ -241,7 +247,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </section>
 
     <!-- Plans Section -->
@@ -405,9 +411,117 @@
         </div>
     </div>
 
-    <!-- Scripts: Modal & Boot Sequence -->
+    <!-- Matrix Rain & Boot Sequence Scripts -->
+    <style>
+        /* Глитч анимация текста */
+        .glitch-active {
+            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #ffffff;
+            text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
+        }
+        @keyframes glitch-skew {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Бегущий код вверх */
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .scrolling-code {
+            animation: scrollUp 20s linear infinite;
+        }
+        .scrolling-code-fast {
+            animation: scrollUp 10s linear infinite;
+        }
+    </style>
+
     <script>
-        // Modal Functions
+        // Генератор мусорного кода (Matrix Rain)
+        function generateRandomHex(length) {
+            let result = '';
+            const characters = '0123456789ABCDEF';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+                if (i % 2 === 1) result += ' '; // Пробел каждые 2 символа
+            }
+            return result;
+        }
+
+        function generateSystemLog(lines) {
+            const logs = [
+                "CONNECTING...", "HANDSHAKE_SYN", "ACK_RECEIVED", "DECRYPT_KEY", 
+                "BUFFER_OVERFLOW", "TRACING_ROUTE", "PROXY_CHAIN", "BYPASS_FIREWALL",
+                "UPLOADING_PACKET", "0x4F22_ADDR", "KERNEL_PANIC", "MOUNT_VOL_2",
+                "PING_SUCCESS", "ETH_0: UP", "WLAN_1: UP", "IP_MASK_HIDDEN"
+            ];
+            let result = '';
+            for(let i=0; i<lines; i++) {
+                result += logs[Math.floor(Math.random() * logs.length)] + '<br>';
+                result += `<span style="opacity:0.5; font-size:8px">${generateRandomHex(12)}</span><br>`;
+            }
+            return result;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Запускаем Matrix Rain
+            const col1 = document.getElementById('col1');
+            const col2 = document.getElementById('col2');
+            const col3 = document.getElementById('col3');
+
+            // Чтобы анимация была бесконечной, мы дублируем контент дважды
+            if(col1 && col2 && col3) {
+                col1.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
+                col2.innerHTML = `<div class="scrolling-code-fast">${generateSystemLog(30)}</div>`;
+                col3.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
+            }
+
+            // 2. Boot Sequence (Терминал статуса)
+            const statusText = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            
+            if (!statusText) return;
+
+            const bootSteps = [
+                { text: "> BIOS_CHECK...", delay: 200 },
+                { text: "> LOAD_KERNEL", delay: 800 },
+                { text: "> MOUNT_VIRTUAL_DRIVE", delay: 1500 },
+                { text: "> DECRYPTING_KEYS...", delay: 2200 },
+                { text: "> ESTABLISHING_P2P...", delay: 3000 },
+                { text: "STATUS: ONLINE", delay: 3800, final: true }
+            ];
+
+            let currentStep = 0;
+
+            function runBoot() {
+                if (currentStep >= bootSteps.length) return;
+                const step = bootSteps[currentStep];
+                
+                setTimeout(() => {
+                    statusText.innerText = step.text;
+                    statusText.setAttribute('data-text', step.text); 
+
+                    if (step.final) {
+                        statusText.classList.add('glitch-active');
+                        statusDot.classList.remove('bg-red-500');
+                        statusDot.classList.add('bg-green-500', 'animate-pulse', 'shadow-[0_0_10px_#00ff00]');
+                        setTimeout(() => statusText.classList.remove('glitch-active'), 1000);
+                    } else {
+                        currentStep++;
+                        runBoot();
+                    }
+                }, step.delay - (currentStep > 0 ? bootSteps[currentStep-1].delay : 0));
+            }
+
+            runBoot();
+        });
+        
+        // Modal Logic
         function openPaymentModal(planName) {
             document.getElementById('paymentModal').classList.remove('hidden');
             document.getElementById('modalPlanName').innerText = planName;
@@ -418,60 +532,10 @@
             document.getElementById('paymentModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
-        
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closePaymentModal();
         });
-
-        // Boot Sequence Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusText = document.getElementById('statusText');
-            const statusDot = document.getElementById('statusDot');
-            
-            if (!statusText) return; // Проверка наличия элемента
-
-            const bootSteps = [
-                { text: "> INIT_PROTOCOL", delay: 500 },
-                { text: "> CHECK_KEYS...", delay: 1200 },
-                { text: "> ENCRYPTING...", delay: 2000 },
-                { text: "> HANDSHAKE_OK", delay: 2800 },
-                { text: "STATUS: ONLINE", delay: 3500, final: true }
-            ];
-
-            let currentStep = 0;
-
-            function runBoot() {
-                if (currentStep >= bootSteps.length) return;
-
-                const step = bootSteps[currentStep];
-                
-                setTimeout(() => {
-                    statusText.innerText = step.text;
-                    statusText.setAttribute('data-text', step.text); 
-
-                    if (step.final) {
-                        // Final State
-                        statusText.classList.add('glitch-active');
-                        statusText.style.color = "white";
-                        statusDot.classList.remove('bg-red-500');
-                        statusDot.classList.add('bg-green-500', 'animate-pulse');
-                        
-                        // Remove heavy glitch after 0.5s
-                        setTimeout(() => {
-                            statusText.classList.remove('glitch-active');
-                        }, 500);
-                    } else {
-                        // Typing blink visual
-                        statusText.style.opacity = 0.7;
-                        setTimeout(() => statusText.style.opacity = 1, 50);
-                        currentStep++;
-                        runBoot();
-                    }
-                }, step.delay - (currentStep > 0 ? bootSteps[currentStep-1].delay : 0));
-            }
-
-            runBoot();
-        });
     </script>
+
 </body>
 </html>
