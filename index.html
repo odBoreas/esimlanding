@@ -213,31 +213,30 @@
                 </div>
             </div>
 
-                 <!-- Visual Content -->
+                  <!-- Visual Content -->
             <div class="order-1 md:order-2 relative animate-float group">
                 <!-- Tech Frames behind image -->
                 <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10"></div>
                 <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed"></div>
 
-                <!-- Image Container -->
-                <div class="relative z-10 border-2 border-black bg-black p-2 overflow-hidden h-[500px] flex items-center justify-center">
+                <!-- Image Container (ТЕПЕРЬ БЕЛЫЙ ФОН) -->
+                <div class="relative z-10 border-2 border-black bg-white p-2 overflow-hidden h-[500px] flex items-center justify-center">
                     
-                    <!-- 🔥 ЭФФЕКТ: DATA RAIN TERMINAL (ФОН) -->
-                    <div class="absolute inset-0 z-0 opacity-40 font-mono text-[10px] leading-tight text-green-500 overflow-hidden flex justify-between px-2 pointer-events-none">
-                        <!-- Колонки кода, которые заполнятся скриптом -->
-                        <div id="col1" class="w-[30%] break-all opacity-50"></div>
-                        <div id="col2" class="w-[30%] break-all font-bold text-retroTeal"></div>
-                        <div id="col3" class="w-[30%] break-all opacity-50"></div>
+                    <!-- 🔥 ЭФФЕКТ: DATA RAIN (СЕРЫЙ КОД НА БЕЛОМ) -->
+                    <div class="absolute inset-0 z-0 font-mono text-[10px] leading-tight text-gray-300 overflow-hidden flex justify-between px-2 pointer-events-none select-none">
+                        <div id="col1" class="w-[30%] break-all opacity-40"></div>
+                        <div id="col2" class="w-[30%] break-all font-bold text-black opacity-20"></div>
+                        <div id="col3" class="w-[30%] break-all opacity-40"></div>
                     </div>
                     
-                    <!-- ВИНЬЕТКА (Затемнение по краям для глубины) -->
-                    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle,transparent_40%,#000_100%)]"></div>
+                    <!-- ВИНЬЕТКА (Легкое затемнение по углам) -->
+                    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.05)_100%)]"></div>
 
-                    <!-- КАРТИНКА (Simphone) -->
-                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-normal drop-shadow-2xl">
+                    <!-- КАРТИНКА (Simphone) - Белый фон сольется с белым фоном контейнера -->
+                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-multiply">
                     
-                    <!-- ЭФФЕКТ 2: Живой терминал статуса -->
-                    <div class="absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-lg">
+                    <!-- ЭФФЕКТ 2: Терминал статуса (Остается черным для контраста) -->
+                    <div class="absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
                         <div class="flex items-center gap-2">
                             <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full"></div>
                             <div id="statusText" class="font-mono text-xs text-retroTeal font-bold tracking-wider" data-text="STATUS: OFFLINE">
@@ -247,6 +246,7 @@
                     </div>
                 </div>
             </div>
+
 
     </section>
 
