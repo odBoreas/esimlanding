@@ -36,6 +36,32 @@
             }
         }
     </script>
+    <style>
+        /* Дополнительные стили для видео-фона */
+        .hero-video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Убираем видео под текст */
+        }
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4; /* Прозрачность видео, чтобы текст читался */
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(15,15,15,0.8), #0f0f0f);
+        }
+    </style>
 </head>
 <body class="min-h-screen bg-primary text-white font-sans">
     <!-- Navigation -->
@@ -52,8 +78,18 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 px-4">
-        <div class="container mx-auto max-w-4xl">
+    <section class="relative pt-24 pb-16 px-4 min-h-[90vh] flex flex-col justify-center overflow-hidden">
+        
+        <!-- 🔥🔥🔥 СЮДА ВСТАВЛЕНО ВИДЕО 🔥🔥🔥 -->
+        <div class="hero-video-wrapper">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="assets/video/bg.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <!-- 🔥🔥🔥 КОНЕЦ БЛОКА ВИДЕО 🔥🔥🔥 -->
+
+        <div class="container mx-auto max-w-4xl relative z-10">
             <div class="text-center mb-12">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                     Anonymous eSIM.<br>
@@ -72,9 +108,11 @@
                 <div class="bg-dark rounded-[3rem] p-6 border-2 border-gray-700 shadow-2xl">
                     <div class="bg-black rounded-[2rem] p-2">
                         <div class="bg-gray-900 rounded-[1.5rem] h-80 flex items-center justify-center">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-accent rounded-full mx-auto mb-4 animate-pulse"></div>
-                        <p class="text-accent font-semibold">Installing eSIM...</p>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-accent rounded-full mx-auto mb-4 animate-pulse"></div>
+                                <p class="text-accent font-semibold">Installing eSIM...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,21 +130,23 @@
                     Instant activation. No personal data.
                 </p>
                 
-                <!-- Countries Table -->
+                <!-- 🔥🔥🔥 Я ПОЧИНИЛ СЕТКУ СТРАН НИЖЕ 🔥🔥🔥 -->
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-                    <div class="bg-primary/50 p-4 rounded-lg text-center">
-                    <div class="text-accent font-bold">Europe</div>
-                    <div class="text-sm text-gray-400">45 countries</div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-                    <div class="bg-primary/50 p-4 rounded-lg text-center">
-                    <div class="text-accent font-bold">Asia</div>
-                    <div class="text-sm text-gray-400">28 countries</div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-                    <div class="bg-primary/50 p-4 rounded-lg text-center">
-                    <div class="text-accent font-bold">Americas</div>
-                    <div class="text-sm text-gray-400">26 countries</div>
+                    <!-- Europe -->
+                    <div class="bg-primary/50 p-4 rounded-lg text-center border border-gray-700 hover:border-accent transition-colors">
+                        <div class="text-accent font-bold">Europe</div>
+                        <div class="text-sm text-gray-400">45 countries</div>
+                    </div>
+                    <!-- Asia -->
+                    <div class="bg-primary/50 p-4 rounded-lg text-center border border-gray-700 hover:border-accent transition-colors">
+                        <div class="text-accent font-bold">Asia</div>
+                        <div class="text-sm text-gray-400">28 countries</div>
+                    </div>
+                    <!-- Americas -->
+                    <div class="bg-primary/50 p-4 rounded-lg text-center border border-gray-700 hover:border-accent transition-colors">
+                        <div class="text-accent font-bold">Americas</div>
+                        <div class="text-sm text-gray-400">26 countries</div>
+                    </div>
                 </div>
                 
                 <button onclick="openPaymentModal()" class="bg-accent text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-accent/90 transition-all duration-300 animate-pulse-glow">
@@ -126,24 +166,27 @@
                 
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <img src="https://picsum.photos/300/600?random=1" alt="App interface screenshot" class="rounded-2xl mx-auto shadow-2xl" loading="lazy">
+                        <!-- 🔥🔥🔥 КАРТИНКА ПРИЛОЖЕНИЯ 🔥🔥🔥 -->
+                        <img src="assets/images/app.png" alt="App interface screenshot" class="rounded-2xl mx-auto shadow-2xl border border-gray-800" loading="lazy">
                     </div>
                     <div class="space-y-6">
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300">
-                            <div class="flex items-center gap-2">
-                                <i class="fab fa-apple text-2xl"></i>
-                                <div class="text-left">
-                                    <div class="text-xs text-gray-400">Download on the</div>
-                                    <div class="font-bold">App Store</div>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300 w-full sm:w-auto">
+                                <div class="flex items-center gap-2 justify-center">
+                                    <i class="fab fa-apple text-2xl"></i>
+                                    <div class="text-left">
+                                        <div class="text-xs text-gray-400">Download on the</div>
+                                        <div class="font-bold">App Store</div>
+                                    </div>
                                 </div>
                             </button>
-                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300">
-                            <div class="flex items-center gap-2">
-                                <i class="fab fa-google-play text-2xl"></i>
-                                <div class="text-left">
-                                    <div class="text-xs text-gray-400">Get it on</div>
-                                    <div class="font-bold">Google Play</div>
+                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300 w-full sm:w-auto">
+                                <div class="flex items-center gap-2 justify-center">
+                                    <i class="fab fa-google-play text-2xl"></i>
+                                    <div class="text-left">
+                                        <div class="text-xs text-gray-400">Get it on</div>
+                                        <div class="font-bold">Google Play</div>
+                                    </div>
                                 </div>
                             </button>
                         </div>
@@ -182,7 +225,7 @@
     <!-- Payment Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-dark rounded-2xl p-6 max-w-md w-full border border-gray-700">
+            <div class="bg-dark rounded-2xl p-6 max-w-md w-full border border-gray-700 relative">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-xl font-bold text-accent">Complete Payment</h3>
                         <button onclick="closePaymentModal()" class="text-gray-400 hover:text-white">
@@ -200,40 +243,41 @@
                     <div class="space-y-3 mb-6">
                         <div class="text-sm text-gray-400">Payment Methods:</div>
                         <div class="grid grid-cols-2 gap-3">
-                            <button onclick="selectPaymentMethod('binance')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
-                            <i class="fas fa-wallet text-accent"></i>
-                            <span>Binance Pay</span>
-                        </button>
-                        <button onclick="selectPaymentMethod('usdt')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
-                            <i class="fas fa-coins text-accent"></i>
-                            <span>USDT</span>
-                        </button>
-                        <button onclick="selectPaymentMethod('btc')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
-                            <i class="fab fa-bitcoin text-accent"></i>
-                            <span>BTC</span>
-                        </button>
-                        <button onclick="selectPaymentMethod('eth')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
-                            <i class="fab fa-ethereum text-accent"></i>
-                            <span>ETH</span>
-                        </button>
+                            <button onclick="selectPaymentMethod('binance')" class="payment-btn bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-wallet text-accent"></i>
+                                <span>Binance Pay</span>
+                            </button>
+                            <button onclick="selectPaymentMethod('usdt')" class="payment-btn bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-coins text-accent"></i>
+                                <span>USDT</span>
+                            </button>
+                            <button onclick="selectPaymentMethod('btc')" class="payment-btn bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
+                                <i class="fab fa-bitcoin text-accent"></i>
+                                <span>BTC</span>
+                            </button>
+                            <button onclick="selectPaymentMethod('eth')" class="payment-btn bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
+                                <i class="fab fa-ethereum text-accent"></i>
+                                <span>ETH</span>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- QR Code Section (Initially Hidden) -->
                     <div id="qrSection" class="hidden">
                         <div class="text-center mb-6">
                             <div class="bg-white p-4 rounded-lg inline-block">
-                                <img src="https://picsum.photos/200?random=2" alt="eSIM QR Code" class="w-48 h-48">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ExamplePayment" alt="eSIM QR Code" class="w-40 h-40">
                             </div>
                             <p class="text-gray-400 mt-4">Scan to install eSIM</p>
                         </div>
                         
                         <!-- QR Actions -->
                         <div class="flex space-x-3 mb-6">
-                            <button onclick="shareQR()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <button onclick="shareQR()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
                                 <i class="fas fa-share-alt text-accent"></i>
                                 <span>Share QR</span>
                             </button>
-                            <button onclick="copyActivationData()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <button onclick="copyActivationData()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all flex items-center justify-center gap-2">
                                 <i class="fas fa-copy text-accent"></i>
                                 <span>Copy Data</span>
                             </button>
@@ -245,11 +289,11 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>SM-DP+ Address:</span>
-                                    <span class="text-accent">rsp.thruton.com</span>
+                                    <span class="text-accent select-all">rsp.thruton.com</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Activation Code:</span>
-                                    <span class="text-accent">QR-NME-98_WE</span>
+                                    <span class="text-accent select-all">QR-NME-98_WE</span>
                                 </div>
                             </div>
                         </div>
@@ -259,20 +303,12 @@
                     <button id="payButton" onclick="processPayment()" class="w-full bg-accent text-primary py-3 rounded-lg font-bold hover:bg-accent/90 transition-all duration-300 animate-pulse-glow">
                         Pay with Crypto
                     </button>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
         // Define data
-        const paymentMethods = [
-            { "id": "binance", "name": "Binance Pay", "icon": "fa-wallet" },
-            { "id": "usdt", "name": "USDT", "icon": "fa-coins" },
-            { "id": "btc", "name": "BTC", "icon": "fa-bitcoin" },
-            { "id": "eth", "name": "ETH", "icon": "fa-ethereum" }
-        ];
-        
         const manualSetupData = {
             "smdp": "rsp.thruton.com",
             "activationCode": "QR-NME-98_WE"
@@ -300,13 +336,18 @@
         
         function selectPaymentMethod(method) {
             selectedPaymentMethod = method;
-            document.querySelectorAll('[onclick^="selectPaymentMethod"]').forEach(btn => {
+            // Reset all buttons
+            document.querySelectorAll('.payment-btn').forEach(btn => {
                 btn.classList.remove('border-accent', 'bg-accent/20');
                 btn.classList.add('border-gray-700');
             });
             
-            const selectedBtn = document.querySelector(`[onclick="selectPaymentMethod('${method}')"]`);
-            selectedBtn.classList.add('border-accent', 'bg-accent/20');
+            // Highlight selected using the onclick attribute match
+            const selectedBtn = document.querySelector(`button[onclick="selectPaymentMethod('${method}')"]`);
+            if(selectedBtn) {
+                selectedBtn.classList.remove('border-gray-700');
+                selectedBtn.classList.add('border-accent', 'bg-accent/20');
+            }
         }
         
         function processPayment() {
@@ -333,7 +374,8 @@
         }
         
         function copyActivationData() {
-            const data = `SM-DP+ Address: ${manualSetupData.smdp}\nActivation Code: ${manualSetupData.activationCode}";
+            // Исправлена ошибка с кавычками
+            const data = `SM-DP+ Address: ${manualSetupData.smdp}\nActivation Code: ${manualSetupData.activationCode}`;
             navigator.clipboard.writeText(data).then(() => {
                 alert("Activation data copied to clipboard");
             });
@@ -343,7 +385,7 @@
             selectedPaymentMethod = null;
             document.getElementById('qrSection').classList.add('hidden');
             document.getElementById('payButton').classList.remove('hidden');
-            document.querySelectorAll('[onclick^="selectPaymentMethod"]').forEach(btn => {
+            document.querySelectorAll('.payment-btn').forEach(btn => {
                 btn.classList.remove('border-accent', 'bg-accent/20');
                 btn.classList.add('border-gray-700');
             });
