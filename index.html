@@ -132,6 +132,29 @@
             z-index: -1;
             pointer-events: none;
         }
+
+        /* Анимации Сканера и Глитча */
+        @keyframes scan {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(500px); opacity: 0; }
+        }
+        .animate-scan {
+            animation: scan 3s linear infinite;
+        }
+
+        .glitch-active {
+            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #00ff88;
+        }
+        @keyframes glitch-skew {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -190,20 +213,31 @@
                 </div>
             </div>
 
-            <!-- Visual Content -->
-            <div class="order-1 md:order-2 relative animate-float">
+            <!-- Visual Content (With Simphone & Animations) -->
+            <div class="order-1 md:order-2 relative animate-float group">
                 <!-- Tech Frames behind image -->
                 <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10"></div>
                 <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed"></div>
 
                 <!-- Image Container -->
-                <div class="relative z-10 border-2 border-black bg-white p-2">
-                    <!-- ТУТ ТВОЯ КАРТИНКА -->
-                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="w-full h-auto object-cover mix-blend-normal grayscale-0 hover:grayscale transition-all duration-500">
+                <div class="relative z-10 border-2 border-black bg-white p-2 overflow-hidden">
                     
-                    <!-- Overlay UI Elements -->
-                    <div class="absolute bottom-4 right-4 bg-black text-white px-2 py-1 font-mono text-xs">
-                        STATUS: ONLINE
+                    <!-- ЭФФЕКТ 1: Сканирующий луч на фоне -->
+                    <div class="absolute inset-0 pointer-events-none z-0 opacity-20">
+                        <div class="w-full h-[2px] bg-retroTeal shadow-[0_0_15px_rgba(0,128,128,1)] animate-scan"></div>
+                    </div>
+
+                    <!-- КАРТИНКА (Simphone) -->
+                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-normal">
+                    
+                    <!-- ЭФФЕКТ 2: Живой терминал статуса -->
+                    <div class="absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-lg">
+                        <div class="flex items-center gap-2">
+                            <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full"></div>
+                            <div id="statusText" class="font-mono text-xs text-retroTeal font-bold tracking-wider" data-text="STATUS: OFFLINE">
+                                > SYSTEM_BOOT...
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -257,55 +291,7 @@
         </div>
     </section>
 
-    <!-- Payment Modal (Retro Style) -->
-    <div id="paymentModal" class="fixed inset-0 z-[99] hidden">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closePaymentModal()"></div>
-        
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
-            <div class="bg-vintageWhite border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
-                <div class="flex justify-between items-center mb-6 border-b-2 border-black pb-2">
-                    <h3 class="font-mono font-bold uppercase text-lg">> Payment_Gateway</h3>
-                    <button onclick="closePaymentModal()" class="hover:text-retroOrange text-2xl">&times;</button>
-                </div>
-
-                <div class="mb-6 text-center font-mono">
-                    <p class="text-sm text-gray-500 mb-1">SELECTED_MODULE:</p>
-                    <p class="text-xl font-bold" id="modalPlanName">UNKNOWN</p>
-                </div>
-
-                <div class="space-y-3 font-mono text-sm">
-                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
-                        <span class="flex items-center gap-2"><i class="fab fa-bitcoin"></i> BITCOIN</span>
-                        <span class="opacity-0 group-hover:opacity-100"><<</span>
-                    </button>
-                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
-                        <span class="flex items-center gap-2"><i class="fas fa-cube"></i> USDT_TRC20</span>
-                        <span class="opacity-0 group-hover:opacity-100"><<</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openPaymentModal(planName) {
-            document.getElementById('paymentModal').classList.remove('hidden');
-            document.getElementById('modalPlanName').innerText = planName;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closePaymentModal();
-        });
-    </script>
-
-
-       <!-- Mobile Terminal Section -->
+    <!-- Mobile Terminal Section (Apps) -->
     <section class="py-24 px-4 border-t-2 border-black bg-vintageWhite relative overflow-hidden">
         <!-- Decorative Background Lines -->
         <div class="absolute top-0 left-1/4 w-px h-full bg-black/10 dashed"></div>
@@ -374,6 +360,118 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="bg-retroBlack text-vintageWhite py-12 px-4 border-t border-gray-800 font-mono">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="flex justify-center space-x-6 mb-8">
+                <i class="fab fa-bitcoin text-retroOrange text-2xl"></i>
+                <i class="fas fa-coins text-retroTeal text-2xl"></i>
+                <i class="fab fa-ethereum text-white text-2xl"></i>
+            </div>
+            <p class="text-sm text-gray-500 uppercase tracking-widest">
+                // Ghost_eSIM Network © 2025 <br>
+                // All connections encrypted
+            </p>
+        </div>
+    </footer>
 
+    <!-- Payment Modal (Retro Style) -->
+    <div id="paymentModal" class="fixed inset-0 z-[99] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closePaymentModal()"></div>
+        
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
+            <div class="bg-vintageWhite border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+                <div class="flex justify-between items-center mb-6 border-b-2 border-black pb-2">
+                    <h3 class="font-mono font-bold uppercase text-lg">> Payment_Gateway</h3>
+                    <button onclick="closePaymentModal()" class="hover:text-retroOrange text-2xl">&times;</button>
+                </div>
+
+                <div class="mb-6 text-center font-mono">
+                    <p class="text-sm text-gray-500 mb-1">SELECTED_MODULE:</p>
+                    <p class="text-xl font-bold" id="modalPlanName">UNKNOWN</p>
+                </div>
+
+                <div class="space-y-3 font-mono text-sm">
+                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
+                        <span class="flex items-center gap-2"><i class="fab fa-bitcoin"></i> BITCOIN</span>
+                        <span class="opacity-0 group-hover:opacity-100"><<</span>
+                    </button>
+                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
+                        <span class="flex items-center gap-2"><i class="fas fa-cube"></i> USDT_TRC20</span>
+                        <span class="opacity-0 group-hover:opacity-100"><<</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts: Modal & Boot Sequence -->
+    <script>
+        // Modal Functions
+        function openPaymentModal(planName) {
+            document.getElementById('paymentModal').classList.remove('hidden');
+            document.getElementById('modalPlanName').innerText = planName;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closePaymentModal();
+        });
+
+        // Boot Sequence Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusText = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            
+            if (!statusText) return; // Проверка наличия элемента
+
+            const bootSteps = [
+                { text: "> INIT_PROTOCOL", delay: 500 },
+                { text: "> CHECK_KEYS...", delay: 1200 },
+                { text: "> ENCRYPTING...", delay: 2000 },
+                { text: "> HANDSHAKE_OK", delay: 2800 },
+                { text: "STATUS: ONLINE", delay: 3500, final: true }
+            ];
+
+            let currentStep = 0;
+
+            function runBoot() {
+                if (currentStep >= bootSteps.length) return;
+
+                const step = bootSteps[currentStep];
+                
+                setTimeout(() => {
+                    statusText.innerText = step.text;
+                    statusText.setAttribute('data-text', step.text); 
+
+                    if (step.final) {
+                        // Final State
+                        statusText.classList.add('glitch-active');
+                        statusText.style.color = "white";
+                        statusDot.classList.remove('bg-red-500');
+                        statusDot.classList.add('bg-green-500', 'animate-pulse');
+                        
+                        // Remove heavy glitch after 0.5s
+                        setTimeout(() => {
+                            statusText.classList.remove('glitch-active');
+                        }, 500);
+                    } else {
+                        // Typing blink visual
+                        statusText.style.opacity = 0.7;
+                        setTimeout(() => statusText.style.opacity = 1, 50);
+                        currentStep++;
+                        runBoot();
+                    }
+                }, step.delay - (currentStep > 0 ? bootSteps[currentStep-1].delay : 0));
+            }
+
+            runBoot();
+        });
+    </script>
 </body>
 </html>
