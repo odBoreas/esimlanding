@@ -66,9 +66,7 @@
         .retro-card { border: 2px solid #111; background: #fff; position: relative; }
         .retro-card::after { content: ''; position: absolute; top: 4px; left: 4px; width: 100%; height: 100%; border: 1px dashed #111; z-index: -1; pointer-events: none; }
 
-        /* Glitch & Scroll */
-        .glitch-active { animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; color: #ffffff; text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
-        @keyframes glitch-skew { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
+        /* Scroll Code Animation */
         @keyframes scrollUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
         .scrolling-code { animation: scrollUp 20s linear infinite; }
         .scrolling-code-fast { animation: scrollUp 10s linear infinite; }
@@ -105,11 +103,10 @@
 
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative">
             
-            <!-- Text Content (Left/Top) -->
+            <!-- Text Content -->
             <div class="order-1 md:order-1 relative z-20 mt-2 md:mt-0">
                 
                 <!-- 🔥 СТАТУС ДЛЯ МОБИЛКИ (Только md:hidden) -->
-                <!-- Без заливки, стоит в потоке, отступ снизу -->
                 <div class="flex items-center gap-3 mb-6 md:hidden">
                     <div class="status-dot w-2 h-2 bg-red-500 rounded-full"></div>
                     <div class="status-text font-mono text-xs text-retroTeal font-bold tracking-widest" data-text="STATUS: OFFLINE">
@@ -123,7 +120,8 @@
                 <h1 class="text-6xl md:text-8xl font-bold leading-[0.9] mb-6 tracking-tighter drop-shadow-sm">
                     HAVE<br>
                     ESIM —<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-retroOrange to-retroTeal" style="-webkit-text-stroke: 2px black;">WILL TRAVEL</span>
+                    <!-- УБРАЛ ГРАДИЕНТ, ТЕПЕРЬ ЧИСТЫЙ ЦВЕТ -->
+                    <span class="text-retroOrange">WILL TRAVEL</span>
                 </h1>
                 <p class="font-mono text-gray-800 md:text-gray-600 mb-8 max-w-md leading-relaxed font-medium md:font-normal">
                     Connect to the global grid. No KYC. No Trace. 
@@ -143,13 +141,13 @@
             <!-- Visual Content (Right/Bg) -->
             <div class="absolute top-0 -right-10 w-[80%] opacity-20 grayscale md:grayscale-0 md:opacity-100 md:static md:w-full md:h-auto z-0 md:z-10 md:order-2 md:animate-float group">
                 
-                <!-- 🔥 Обертка с РАМКАМИ для ДЕСКТОПА (md:border-2) -->
-                <div class="relative border-none md:border-2 md:border-black bg-transparent md:bg-white p-0 md:p-2 overflow-hidden h-full md:h-[500px] flex items-center justify-center relative">
+                <!-- 🔥 ВЕРНУЛ БОРДЕР И ТЕНЬ КАК У КНОПОК (shadow-[8px_8px...]) -->
+                <div class="relative border-none md:border-2 md:border-black md:bg-white md:shadow-[8px_8px_0px_#111] p-0 md:p-2 overflow-hidden h-full md:h-[500px] flex items-center justify-center relative">
                     
-                    <!-- Tech Frames & Matrix (Только Desktop) -->
+                    <!-- Tech Frames (УБРАЛ ПУНКТИРНОЕ ТИРЕ СПРАВА) -->
                     <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10 hidden md:block"></div>
-                    <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed hidden md:block"></div>
 
+                    <!-- DATA RAIN -->
                     <div class="absolute inset-0 z-0 font-mono text-[10px] leading-tight text-gray-400/50 overflow-hidden hidden md:flex justify-between px-2 pointer-events-none select-none">
                         <div id="col1" class="w-[30%] break-all opacity-60"></div>
                         <div id="col2" class="w-[30%] break-all font-bold text-black opacity-30"></div>
@@ -159,12 +157,12 @@
                     <!-- КАРТИНКА -->
                     <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover drop-shadow-2xl mix-blend-multiply md:mix-blend-normal">
                     
-                    <!-- 🔥 СТАТУС ДЛЯ ДЕСКТОПА (Только hidden md:block) -->
-                    <!-- Внутри рамки, снизу справа, с заливкой -->
+                    <!-- 🔥 СТАТУС ДЛЯ ДЕСКТОПА (Внутри рамки) -->
                     <div class="hidden md:block absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
                         <div class="flex items-center gap-2">
                             <div class="status-dot w-2 h-2 bg-red-500 rounded-full"></div>
-                            <div class="status-text font-mono text-xs text-retroTeal font-bold tracking-widest" data-text="STATUS: OFFLINE">
+                            <!-- УБРАЛ ГЛИТЧ ЭФФЕКТ -->
+                            <div class="status-text font-mono text-xs text-retroTeal font-bold tracking-widest">
                                 > BOOT...
                             </div>
                         </div>
@@ -313,7 +311,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Matrix only on desktop
             if(window.innerWidth > 768) {
                 const col1 = document.getElementById('col1'); const col2 = document.getElementById('col2'); const col3 = document.getElementById('col3');
                 if(col1 && col2 && col3) {
@@ -323,10 +320,8 @@
                 }
             }
 
-            // Обновил JS, чтобы он искал все элементы статуса (и мобильный, и десктопный)
             const statusTexts = document.querySelectorAll('.status-text');
             const statusDots = document.querySelectorAll('.status-dot');
-            
             if (statusTexts.length === 0) return;
 
             const bootSteps = [{ text: "> BIOS_CHECK...", delay: 200 }, { text: "> LOAD_KERNEL", delay: 800 }, { text: "> MOUNT_VIRTUAL_DRIVE", delay: 1500 }, { text: "> DECRYPTING_KEYS...", delay: 2200 }, { text: "> ESTABLISHING_P2P...", delay: 3000 }, { text: "STATUS: ONLINE", delay: 3800, final: true }];
@@ -338,11 +333,6 @@
                 setTimeout(() => {
                     statusTexts.forEach(el => {
                         el.innerText = step.text; 
-                        el.setAttribute('data-text', step.text);
-                        if (step.final) {
-                            el.classList.add('glitch-active');
-                            setTimeout(() => el.classList.remove('glitch-active'), 1000);
-                        }
                     });
                     
                     statusDots.forEach(dot => {
