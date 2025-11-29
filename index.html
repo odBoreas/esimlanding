@@ -1,46 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost eSIM | Invisible Connection</title>
-    <meta name="description" content="Anonymous eSIM. No KYC. Crypto payments only.">
+    <title>Ghost eSIM | Retro Future</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем шрифты Space Grotesk и Space Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', '-apple-system', 'system-ui', 'sans-serif'],
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
                     },
                     colors: {
-                        glass: "rgba(255, 255, 255, 0.7)",
-                        glassBorder: "rgba(255, 255, 255, 0.5)",
-                        textMain: "#1d1d1f",
-                        textSec: "#86868b",
-                        accentBlue: "#0071e3",
-                        accentGreen: "#34c759"
+                        vintageWhite: "#F2F2F0",
+                        retroBlack: "#111111",
+                        retroOrange: "#FF4D00",
+                        retroChrome: "#C0C0C0",
+                        retroTeal: "#008080"
                     },
                     animation: {
-                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'spin-slow': 'spin 10s linear infinite',
                         'float': 'float 6s ease-in-out infinite'
                     },
                     keyframes: {
-                        'gradient-x': {
-                            '0%, 100%': {
-                                'background-size': '200% 200%',
-                                'background-position': 'left center'
-                            },
-                            '50%': {
-                                'background-size': '200% 200%',
-                                'background-position': 'right center'
-                            },
-                        },
                         'float': {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
+                            '50%': { transform: 'translateY(-15px)' }
                         }
                     }
                 }
@@ -49,234 +40,248 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-
         body {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); /* Fallback */
-            background-size: 400% 400%;
-            color: #1d1d1f;
+            background-color: #F2F2F0;
+            color: #111111;
+            overflow-x: hidden;
         }
 
-        /* Animated Background Wrapper */
-        .aurora-bg {
+        /* Эффект зернистости (Noise Overlay) */
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Техническая сетка на фоне */
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            background: linear-gradient(
-                -45deg, 
-                #ff9a9e, 
-                #fad0c4, 
-                #a18cd1, 
-                #fbc2eb
-            );
-            background-size: 400% 400%;
-            animation: gradient-x 15s ease infinite;
-            opacity: 0.6;
         }
 
-        /* Apple Glass Effect */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        /* Стилизация скроллбара */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F2F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #111;
+            border: 1px solid #F2F2F0;
         }
 
-        .glass-button {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.3s ease;
+        /* Ретро кнопки */
+        .btn-retro {
+            position: relative;
+            border: 2px solid #111;
+            background: transparent;
+            color: #111;
+            text-transform: uppercase;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 4px 4px 0px #111;
         }
         
-        .glass-button:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .btn-retro:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #111;
         }
 
-        .text-gradient {
-            background: linear-gradient(45deg, #1d1d1f, #434344);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .btn-retro-primary {
+            background: #111;
+            color: #F2F2F0;
+            box-shadow: 4px 4px 0px #FF4D00;
+            border: 2px solid #111;
+        }
+
+        .btn-retro-primary:hover {
+            box-shadow: 2px 2px 0px #FF4D00;
+            transform: translate(2px, 2px);
+        }
+
+        /* Карточки */
+        .retro-card {
+            border: 2px solid #111;
+            background: #fff;
+            position: relative;
+        }
+        .retro-card::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed #111;
+            z-index: -1;
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="font-sans antialiased">
-
-    <!-- Dynamic Background -->
-    <div class="aurora-bg"></div>
+<body class="antialiased">
+    <div class="noise-overlay"></div>
+    <div class="grid-bg"></div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 top-0 start-0 transition-all duration-300 p-4">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4 rounded-2xl glass-panel">
-            <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse">
-                <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white">
-                    <i class="fas fa-ghost"></i>
+    <nav class="fixed w-full z-50 top-0 border-b-2 border-black bg-vintageWhite/90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-retroOrange border-2 border-black flex items-center justify-center group-hover:bg-black transition-colors">
+                    <i class="fas fa-ghost text-black group-hover:text-retroOrange"></i>
                 </div>
-                <span class="self-center text-xl font-semibold whitespace-nowrap tracking-tight">Ghost<span class="font-light">eSIM</span></span>
+                <span class="text-xl font-bold tracking-tighter uppercase font-mono">Ghost<span class="text-retroOrange">_eSIM</span></span>
             </a>
-            <div class="hidden w-full md:block md:w-auto">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-                    <li><a href="#" class="block py-2 px-3 text-textMain hover:text-accentBlue transition-colors">How it works</a></li>
-                    <li><a href="#" class="block py-2 px-3 text-textMain hover:text-accentBlue transition-colors">Pricing</a></li>
+            <div class="hidden md:block">
+                <ul class="flex space-x-8 font-mono text-sm uppercase tracking-widest">
+                    <li><a href="#" class="hover:bg-black hover:text-white px-2 py-1 transition-colors">[System]</a></li>
+                    <li><a href="#" class="hover:bg-black hover:text-white px-2 py-1 transition-colors">[Pricing]</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-4 pt-20">
-        <div class="text-center max-w-5xl mx-auto z-10">
-            <!-- Badge -->
-            <div class="inline-flex items-center px-4 py-2 rounded-full glass-panel mb-8 animate-float">
-                <span class="w-2 h-2 bg-accentGreen rounded-full mr-2 animate-pulse"></span>
-                <span class="text-sm font-medium text-textSec">No KYC. No Registration. 100% Private.</span>
-            </div>
-
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6 leading-tight text-textMain">
-                Connect <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Invisibly.</span><br>
-                Pay <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-pink-600">Silently.</span>
-            </h1>
-            
-            <p class="mb-10 text-xl font-light text-textSec max-w-2xl mx-auto leading-relaxed">
-                Instant global connectivity powered by crypto. 
-                Your identity remains yours. We just provide the data.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#plans" class="group relative px-8 py-5 bg-black text-white rounded-full font-semibold text-lg shadow-xl hover:bg-gray-800 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-                    Get Anonymous eSIM
-                    <i class="fas fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
-                </a>
-                <a href="#features" class="glass-button px-8 py-5 rounded-full font-medium text-lg text-textMain flex items-center justify-center gap-2">
-                    <i class="fab fa-bitcoin"></i> Pay with Crypto
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features / Plans Block -->
-    <section id="plans" class="py-24 px-4 relative">
-        <div class="max-w-6xl mx-auto">
-            
-            <!-- Grid -->
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                
-                <!-- Left: Visual -->
-                <div class="relative animate-float">
-                    <!-- Place your Glass Phone image here -->
-                    <!-- If no image yet, this div acts as a placeholder -->
-                    <div class="aspect-[4/5] glass-panel rounded-[3rem] flex items-center justify-center relative overflow-hidden border-4 border-white/50">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-100/50 to-purple-100/50"></div>
-                        
-                        <!-- Mock Content inside Phone -->
-                        <div class="text-center z-10">
-                            <div class="w-24 h-24 bg-white rounded-3xl shadow-lg mx-auto mb-6 flex items-center justify-center">
-                                <i class="fas fa-shield-alt text-4xl text-accentGreen"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-2">eSIM Active</h3>
-                            <p class="text-textSec">IP: 192.168.X.X (Hidden)</p>
-                            <div class="mt-8 inline-block px-6 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">
-                                Protected
-                            </div>
-                        </div>
-                        
-                        <!-- Reflection -->
-                        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
-                    </div>
-                </div>
-
-                <!-- Right: Content -->
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-textMain">
-                        One Plan.<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Unlimited Freedom.</span>
-                    </h2>
-
-                    <div class="space-y-6">
-                        <!-- Card 1 -->
-                        <div class="glass-panel p-6 rounded-2xl transition-transform hover:scale-[1.02] cursor-pointer" onclick="openPaymentModal('Global Plan')">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="text-xl font-bold">Global Citizen</h3>
-                                <span class="bg-black text-white px-3 py-1 rounded-full text-sm font-bold">$29</span>
-                            </div>
-                            <p class="text-textSec mb-4">Valid in 99+ countries. 5GB Data. 30 Days.</p>
-                            <div class="flex gap-2 text-2xl text-gray-400">
-                                <i class="fab fa-btc hover:text-[#F7931A] transition-colors"></i>
-                                <i class="fab fa-ethereum hover:text-[#627EEA] transition-colors"></i>
-                                <i class="fas fa-dollar-sign hover:text-green-500 transition-colors"></i>
-                            </div>
-                        </div>
-
-                         <!-- Card 2 -->
-                         <div class="glass-panel p-6 rounded-2xl transition-transform hover:scale-[1.02] cursor-pointer" onclick="openPaymentModal('Unlimited')">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="text-xl font-bold">Digital Nomad</h3>
-                                <span class="bg-black text-white px-3 py-1 rounded-full text-sm font-bold">$49</span>
-                            </div>
-                            <p class="text-textSec mb-4">Valid in 99+ countries. 10GB Data. 30 Days.</p>
-                            <div class="flex gap-2 text-2xl text-gray-400">
-                                <i class="fab fa-btc hover:text-[#F7931A] transition-colors"></i>
-                                <i class="fab fa-ethereum hover:text-[#627EEA] transition-colors"></i>
-                                <i class="fas fa-dollar-sign hover:text-green-500 transition-colors"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="mt-8 text-sm text-textSec">
-                        <i class="fas fa-info-circle mr-2"></i> Instant QR code delivery via email after blockchain confirmation.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Modal (Darkened Glass) -->
-    <div id="paymentModal" class="fixed inset-0 z-[60] hidden">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/30 backdrop-blur-md" onclick="closePaymentModal()"></div>
+    <section class="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden">
         
-        <!-- Modal Content -->
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
-            <div class="bg-white rounded-3xl shadow-2xl p-8 relative overflow-hidden">
-                <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
+        <!-- Decorative Circles -->
+        <div class="absolute right-0 top-20 w-64 h-64 border border-black rounded-full opacity-20 animate-spin-slow border-dashed"></div>
+        <div class="absolute left-10 bottom-20 w-32 h-32 border-2 border-retroOrange rounded-full opacity-50"></div>
 
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-blue-50 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-wallet text-2xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900" id="modalPlanName">Selected Plan</h3>
-                    <p class="text-gray-500">Choose your crypto currency</p>
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <!-- Text Content -->
+            <div class="order-2 md:order-1">
+                <div class="font-mono text-retroOrange text-sm mb-4 uppercase tracking-widest border-l-4 border-black pl-3">
+                    // Protocol: Anonymous
                 </div>
+                <h1 class="text-6xl md:text-8xl font-bold leading-[0.9] mb-6 tracking-tighter">
+                    HAVE<br>
+                    ESIM —<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-retroOrange to-retroTeal" style="-webkit-text-stroke: 2px black;">WILL TRAVEL</span>
+                </h1>
+                <p class="font-mono text-gray-600 mb-8 max-w-md leading-relaxed">
+                    Connect to the global grid. No KYC. No Trace. 
+                    Pure data transmission via encrypted channels.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#plans" class="btn-retro btn-retro-primary px-8 py-4 text-center">
+                        Initialize eSIM
+                    </a>
+                    <a href="#features" class="btn-retro px-8 py-4 text-center flex items-center justify-center gap-3">
+                        <i class="fab fa-bitcoin"></i> Pay Crypto
+                    </a>
+                </div>
+            </div>
 
-                <div class="space-y-3">
-                    <button class="w-full p-4 rounded-xl border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all flex items-center justify-between group">
-                        <div class="flex items-center gap-3">
-                            <i class="fab fa-bitcoin text-[#F7931A] text-xl"></i>
-                            <span class="font-semibold text-gray-700">Bitcoin</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-500"></i>
-                    </button>
+            <!-- Visual Content -->
+            <div class="order-1 md:order-2 relative animate-float">
+                <!-- Tech Frames behind image -->
+                <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10"></div>
+                <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed"></div>
+
+                <!-- Image Container -->
+                <div class="relative z-10 border-2 border-black bg-white p-2">
+                    <!-- ТУТ ТВОЯ КАРТИНКА -->
+                    <img src="assets/images/glass-phone.png" alt="Retro Communicator" class="w-full h-auto object-cover mix-blend-normal grayscale-0 hover:grayscale transition-all duration-500">
                     
-                    <button class="w-full p-4 rounded-xl border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all flex items-center justify-between group">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-cube text-[#26A17B] text-xl"></i>
-                            <span class="font-semibold text-gray-700">USDT (TRC20)</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-500"></i>
+                    <!-- Overlay UI Elements -->
+                    <div class="absolute bottom-4 right-4 bg-black text-white px-2 py-1 font-mono text-xs">
+                        STATUS: ONLINE
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section id="plans" class="py-24 px-4 border-t-2 border-black bg-white relative">
+        <!-- Background Grid Pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#111 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold uppercase mb-4 tracking-tight">Data Packages</h2>
+                <div class="w-24 h-1 bg-retroOrange mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Plan 1 -->
+                <div class="retro-card p-8 hover:bg-retroOrange/5 transition-colors cursor-pointer" onclick="openPaymentModal('GLOBAL_PLAN_A')">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="font-mono text-xl font-bold uppercase">/ Sector: Global</h3>
+                        <div class="bg-black text-white px-3 py-1 font-mono text-lg font-bold">$29</div>
+                    </div>
+                    <div class="space-y-4 font-mono text-sm border-t border-dashed border-gray-400 pt-4 mb-8">
+                        <div class="flex justify-between"><span>DATA_CAP</span> <span>5 GB</span></div>
+                        <div class="flex justify-between"><span>DURATION</span> <span>30 DAYS</span></div>
+                        <div class="flex justify-between"><span>COVERAGE</span> <span>99 ZONES</span></div>
+                    </div>
+                    <button class="w-full btn-retro py-3 text-sm">
+                        Select Frequency
                     </button>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-gray-100 text-center">
-                    <p class="text-xs text-gray-400">Secure payment processed anonymously</p>
+                <!-- Plan 2 -->
+                <div class="retro-card p-8 hover:bg-retroTeal/5 transition-colors cursor-pointer" onclick="openPaymentModal('NOMAD_PLAN_B')">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="font-mono text-xl font-bold uppercase">/ Sector: Nomad</h3>
+                        <div class="bg-black text-white px-3 py-1 font-mono text-lg font-bold">$49</div>
+                    </div>
+                    <div class="space-y-4 font-mono text-sm border-t border-dashed border-gray-400 pt-4 mb-8">
+                        <div class="flex justify-between"><span>DATA_CAP</span> <span>10 GB</span></div>
+                        <div class="flex justify-between"><span>DURATION</span> <span>30 DAYS</span></div>
+                        <div class="flex justify-between"><span>COVERAGE</span> <span>99 ZONES</span></div>
+                    </div>
+                    <button class="w-full btn-retro py-3 text-sm">
+                        Select Frequency
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal (Retro Style) -->
+    <div id="paymentModal" class="fixed inset-0 z-[99] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closePaymentModal()"></div>
+        
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
+            <div class="bg-vintageWhite border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+                <div class="flex justify-between items-center mb-6 border-b-2 border-black pb-2">
+                    <h3 class="font-mono font-bold uppercase text-lg">> Payment_Gateway</h3>
+                    <button onclick="closePaymentModal()" class="hover:text-retroOrange text-2xl">&times;</button>
+                </div>
+
+                <div class="mb-6 text-center font-mono">
+                    <p class="text-sm text-gray-500 mb-1">SELECTED_MODULE:</p>
+                    <p class="text-xl font-bold" id="modalPlanName">UNKNOWN</p>
+                </div>
+
+                <div class="space-y-3 font-mono text-sm">
+                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
+                        <span class="flex items-center gap-2"><i class="fab fa-bitcoin"></i> BITCOIN</span>
+                        <span class="opacity-0 group-hover:opacity-100"><<</span>
+                    </button>
+                    <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
+                        <span class="flex items-center gap-2"><i class="fas fa-cube"></i> USDT_TRC20</span>
+                        <span class="opacity-0 group-hover:opacity-100"><<</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -293,8 +298,7 @@
             document.getElementById('paymentModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
-
-        // Close on Escape
+        
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closePaymentModal();
         });
