@@ -6,7 +6,6 @@
     <title>Ghost eSIM | Retro Future</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Подключаем шрифты Space Grotesk и Space Mono -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script>
@@ -45,116 +44,34 @@
             color: #111111;
             overflow-x: hidden;
         }
-
-        /* Эффект зернистости (Noise Overlay) */
         .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.06;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.06;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-
-        /* Техническая сетка на фоне */
         .grid-bg {
-            background-image: 
-                linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            background-image: linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F2F2F0; }
+        ::-webkit-scrollbar-thumb { background: #111; border: 1px solid #F2F2F0; }
 
-        /* Стилизация скроллбара */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F2F2F0;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #111;
-            border: 1px solid #F2F2F0;
-        }
-
-        /* Ретро кнопки */
         .btn-retro {
-            position: relative;
-            border: 2px solid #111;
-            background: transparent;
-            color: #111;
-            text-transform: uppercase;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            transition: all 0.2s ease;
-            box-shadow: 4px 4px 0px #111;
+            position: relative; border: 2px solid #111; background: transparent; color: #111; text-transform: uppercase; font-family: 'Space Mono', monospace; font-weight: 700; transition: all 0.2s ease; box-shadow: 4px 4px 0px #111;
         }
-        
-        .btn-retro:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #111;
-        }
+        .btn-retro:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #111; }
+        .btn-retro-primary { background: #111; color: #F2F2F0; box-shadow: 4px 4px 0px #FF4D00; border: 2px solid #111; }
+        .btn-retro-primary:hover { box-shadow: 2px 2px 0px #FF4D00; transform: translate(2px, 2px); }
 
-        .btn-retro-primary {
-            background: #111;
-            color: #F2F2F0;
-            box-shadow: 4px 4px 0px #FF4D00;
-            border: 2px solid #111;
-        }
+        .retro-card { border: 2px solid #111; background: #fff; position: relative; }
+        .retro-card::after { content: ''; position: absolute; top: 4px; left: 4px; width: 100%; height: 100%; border: 1px dashed #111; z-index: -1; pointer-events: none; }
 
-        .btn-retro-primary:hover {
-            box-shadow: 2px 2px 0px #FF4D00;
-            transform: translate(2px, 2px);
-        }
-
-        /* Карточки */
-        .retro-card {
-            border: 2px solid #111;
-            background: #fff;
-            position: relative;
-        }
-        .retro-card::after {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 100%;
-            height: 100%;
-            border: 1px dashed #111;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Анимации Сканера и Глитча */
-        @keyframes scan {
-            0% { transform: translateY(-100%); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(500px); opacity: 0; }
-        }
-        .animate-scan {
-            animation: scan 3s linear infinite;
-        }
-
-        .glitch-active {
-            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-            color: #00ff88;
-        }
-        @keyframes glitch-skew {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
+        /* Glitch & Scroll */
+        .glitch-active { animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; color: #ffffff; text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
+        @keyframes glitch-skew { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
+        @keyframes scrollUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        .scrolling-code { animation: scrollUp 20s linear infinite; }
+        .scrolling-code-fast { animation: scrollUp 10s linear infinite; }
     </style>
 </head>
 <body class="antialiased">
@@ -179,17 +96,17 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (MOBILE FIXED) -->
     <section class="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden">
         
         <!-- Decorative Circles -->
         <div class="absolute right-0 top-20 w-64 h-64 border border-black rounded-full opacity-20 animate-spin-slow border-dashed"></div>
         <div class="absolute left-10 bottom-20 w-32 h-32 border-2 border-retroOrange rounded-full opacity-50"></div>
 
-        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative">
             
-            <!-- Text Content -->
-            <div class="order-2 md:order-1">
+            <!-- Text Content (На мобилке Z-Index выше, чтобы кнопки работали) -->
+            <div class="order-1 md:order-1 relative z-20 mt-8 md:mt-0">
                 <div class="font-mono text-retroOrange text-sm mb-4 uppercase tracking-widest border-l-4 border-black pl-3">
                     // Protocol: Anonymous
                 </div>
@@ -198,7 +115,7 @@
                     ESIM —<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-retroOrange to-retroTeal" style="-webkit-text-stroke: 2px black;">WILL TRAVEL</span>
                 </h1>
-                <p class="font-mono text-gray-600 mb-8 max-w-md leading-relaxed">
+                <p class="font-mono text-gray-600 mb-8 max-w-md leading-relaxed bg-vintageWhite/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-2 md:p-0 rounded">
                     Connect to the global grid. No KYC. No Trace. 
                     Pure data transmission via encrypted channels.
                 </p>
@@ -207,36 +124,33 @@
                     <a href="#plans" class="btn-retro btn-retro-primary px-8 py-4 text-center">
                         Initialize eSIM
                     </a>
-                    <a href="#features" class="btn-retro px-8 py-4 text-center flex items-center justify-center gap-3">
+                    <a href="#features" class="btn-retro px-8 py-4 text-center flex items-center justify-center gap-3 bg-white/80 md:bg-transparent">
                         <i class="fab fa-bitcoin"></i> Pay Crypto
                     </a>
                 </div>
             </div>
 
-                  <!-- Visual Content -->
-            <div class="order-1 md:order-2 relative animate-float group">
-                <!-- Tech Frames behind image -->
-                <div class="absolute inset-0 border-2 border-black translate-x-4 translate-y-4 bg-retroChrome/20 -z-10"></div>
-                <div class="absolute -right-8 top-1/2 w-16 h-32 border-y-2 border-r-2 border-black border-dashed"></div>
-
-                <!-- Image Container (ТЕПЕРЬ БЕЛЫЙ ФОН) -->
-                <div class="relative z-10 border-2 border-black bg-white p-2 overflow-hidden h-[500px] flex items-center justify-center">
+            <!-- Visual Content -->
+            <!-- НА МОБИЛКЕ: Absolute, прозрачный, на фоне, без анимаций -->
+            <!-- НА ДЕСКТОПЕ (md): Relative, справа, полная яркость, с анимациями -->
+            <div class="order-2 md:order-2 absolute inset-0 md:relative w-full h-full md:h-auto z-0 md:z-10 pointer-events-none flex items-center justify-center md:block opacity-15 md:opacity-100 grayscale md:grayscale-0">
+                
+                <!-- Container -->
+                <div class="relative border-none md:border-2 border-black bg-transparent md:bg-white p-0 md:p-2 overflow-hidden h-full md:h-[500px] w-full flex items-center justify-center">
                     
-                    <!-- 🔥 ЭФФЕКТ: DATA RAIN (СЕРЫЙ КОД НА БЕЛОМ) -->
-                    <div class="absolute inset-0 z-0 font-mono text-[10px] leading-tight text-gray-300 overflow-hidden flex justify-between px-2 pointer-events-none select-none">
-                        <div id="col1" class="w-[30%] break-all opacity-40"></div>
-                        <div id="col2" class="w-[30%] break-all font-bold text-black opacity-20"></div>
-                        <div id="col3" class="w-[30%] break-all opacity-40"></div>
+                    <!-- DATA RAIN (Скрыт на мобилке "hidden md:flex") -->
+                    <div class="absolute inset-0 z-0 font-mono text-[10px] leading-tight text-gray-400/50 overflow-hidden hidden md:flex justify-between px-2 pointer-events-none select-none">
+                        <div id="col1" class="w-[30%] break-all opacity-60"></div>
+                        <div id="col2" class="w-[30%] break-all font-bold text-black opacity-30"></div>
+                        <div id="col3" class="w-[30%] break-all opacity-60"></div>
                     </div>
-                    
-                    <!-- ВИНЬЕТКА (Легкое затемнение по углам) -->
-                    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.05)_100%)]"></div>
 
-                    <!-- КАРТИНКА (Simphone) - Белый фон сольется с белым фоном контейнера -->
-                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-full h-auto object-cover mix-blend-multiply">
+                    <!-- КАРТИНКА (Simphone) -->
+                    <img src="assets/images/simphone.png" alt="Retro Communicator" class="relative z-10 w-3/4 md:w-full h-auto object-cover drop-shadow-xl mix-blend-multiply md:mix-blend-normal">
                     
-                    <!-- ЭФФЕКТ 2: Терминал статуса (Остается черным для контраста) -->
-                    <div class="absolute bottom-4 right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+                    <!-- Терминал статуса (Всегда виден) -->
+                    <!-- На мобилке сдвинут вверх, чтобы не перекрывать футер, если экран маленький -->
+                    <div class="absolute top-24 right-4 md:top-auto md:bottom-4 md:right-4 bg-black border border-retroTeal px-3 py-1 z-20 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] opacity-80 md:opacity-100">
                         <div class="flex items-center gap-2">
                             <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full"></div>
                             <div id="statusText" class="font-mono text-xs text-retroTeal font-bold tracking-wider" data-text="STATUS: OFFLINE">
@@ -246,13 +160,11 @@
                     </div>
                 </div>
             </div>
-
-
+        </div>
     </section>
 
     <!-- Plans Section -->
     <section id="plans" class="py-24 px-4 border-t-2 border-black bg-white relative">
-        <!-- Background Grid Pattern -->
         <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#111 1px, transparent 1px); background-size: 20px 20px;"></div>
 
         <div class="max-w-5xl mx-auto relative z-10">
@@ -262,7 +174,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Plan 1 -->
                 <div class="retro-card p-8 hover:bg-retroOrange/5 transition-colors cursor-pointer" onclick="openPaymentModal('GLOBAL_PLAN_A')">
                     <div class="flex justify-between items-start mb-6">
                         <h3 class="font-mono text-xl font-bold uppercase">/ Sector: Global</h3>
@@ -273,12 +184,9 @@
                         <div class="flex justify-between"><span>DURATION</span> <span>30 DAYS</span></div>
                         <div class="flex justify-between"><span>COVERAGE</span> <span>99 ZONES</span></div>
                     </div>
-                    <button class="w-full btn-retro py-3 text-sm">
-                        Select Frequency
-                    </button>
+                    <button class="w-full btn-retro py-3 text-sm">Select Frequency</button>
                 </div>
 
-                <!-- Plan 2 -->
                 <div class="retro-card p-8 hover:bg-retroTeal/5 transition-colors cursor-pointer" onclick="openPaymentModal('NOMAD_PLAN_B')">
                     <div class="flex justify-between items-start mb-6">
                         <h3 class="font-mono text-xl font-bold uppercase">/ Sector: Nomad</h3>
@@ -289,41 +197,27 @@
                         <div class="flex justify-between"><span>DURATION</span> <span>30 DAYS</span></div>
                         <div class="flex justify-between"><span>COVERAGE</span> <span>99 ZONES</span></div>
                     </div>
-                    <button class="w-full btn-retro py-3 text-sm">
-                        Select Frequency
-                    </button>
+                    <button class="w-full btn-retro py-3 text-sm">Select Frequency</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mobile Terminal Section (Apps) -->
+    <!-- Mobile Terminal Section -->
     <section class="py-24 px-4 border-t-2 border-black bg-vintageWhite relative overflow-hidden">
-        <!-- Decorative Background Lines -->
         <div class="absolute top-0 left-1/4 w-px h-full bg-black/10 dashed"></div>
         <div class="absolute top-0 right-1/4 w-px h-full bg-black/10 dashed"></div>
         
         <div class="max-w-4xl mx-auto relative z-10">
-            <!-- Header -->
             <div class="flex items-end justify-between mb-12 border-b-2 border-black pb-4">
                 <div>
-                    <div class="text-xs font-mono text-retroOrange mb-2 uppercase tracking-widest">
-                        // Remote_Control
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight leading-none">
-                        Terminal<br>Access
-                    </h2>
+                    <div class="text-xs font-mono text-retroOrange mb-2 uppercase tracking-widest">// Remote_Control</div>
+                    <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight leading-none">Terminal<br>Access</h2>
                 </div>
-                <div class="hidden md:block text-right font-mono text-xs leading-tight text-gray-500">
-                    VER: 2.0.4<br>
-                    BUILD: STABLE
-                </div>
+                <div class="hidden md:block text-right font-mono text-xs leading-tight text-gray-500">VER: 2.0.4<br>BUILD: STABLE</div>
             </div>
 
-            <!-- App Buttons Grid -->
             <div class="grid md:grid-cols-2 gap-6">
-                
-                <!-- iOS Module -->
                 <a href="https://apps.apple.com/us/app/dexmobile-esim/id6472164663" target="_blank" class="group relative block bg-white border-2 border-black p-8 hover:bg-black transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(255,77,0,1)] hover:-translate-y-1">
                     <div class="flex justify-between items-start mb-8">
                         <i class="fab fa-apple text-4xl text-black group-hover:text-white transition-colors"></i>
@@ -332,14 +226,10 @@
                     <div>
                         <div class="font-mono text-xs text-gray-500 group-hover:text-retroOrange mb-1 uppercase">System: iOS</div>
                         <div class="text-2xl font-bold group-hover:text-white uppercase">App Store</div>
-                        <div class="mt-4 font-mono text-xs border-t border-gray-300 group-hover:border-gray-700 pt-2 flex justify-between group-hover:text-gray-400">
-                            <span>SIZE: 45MB</span>
-                            <span>[DOWNLOAD]</span>
-                        </div>
+                        <div class="mt-4 font-mono text-xs border-t border-gray-300 group-hover:border-gray-700 pt-2 flex justify-between group-hover:text-gray-400"><span>SIZE: 45MB</span><span>[DOWNLOAD]</span></div>
                     </div>
                 </a>
 
-                <!-- Android Module -->
                 <a href="https://play.google.com/store/apps/details?id=com.dexnet.esim" target="_blank" class="group relative block bg-white border-2 border-black p-8 hover:bg-black transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,128,128,1)] hover:-translate-y-1">
                     <div class="flex justify-between items-start mb-8">
                         <i class="fab fa-android text-4xl text-black group-hover:text-white transition-colors"></i>
@@ -348,20 +238,12 @@
                     <div>
                         <div class="font-mono text-xs text-gray-500 group-hover:text-retroTeal mb-1 uppercase">System: Android</div>
                         <div class="text-2xl font-bold group-hover:text-white uppercase">Play Market</div>
-                        <div class="mt-4 font-mono text-xs border-t border-gray-300 group-hover:border-gray-700 pt-2 flex justify-between group-hover:text-gray-400">
-                            <span>SIZE: 48MB</span>
-                            <span>[DOWNLOAD]</span>
-                        </div>
+                        <div class="mt-4 font-mono text-xs border-t border-gray-300 group-hover:border-gray-700 pt-2 flex justify-between group-hover:text-gray-400"><span>SIZE: 48MB</span><span>[DOWNLOAD]</span></div>
                     </div>
                 </a>
-
             </div>
-            
-            <!-- Decorative Marquee Text below -->
             <div class="mt-12 text-center">
-                <p class="font-mono text-xs text-gray-400 uppercase tracking-[0.2em]">
-                    * Install to manage eSIM keys & top-up balance anonymously
-                </p>
+                <p class="font-mono text-xs text-gray-400 uppercase tracking-[0.2em]">* Install to manage eSIM keys & top-up balance anonymously</p>
             </div>
         </div>
     </section>
@@ -374,29 +256,23 @@
                 <i class="fas fa-coins text-retroTeal text-2xl"></i>
                 <i class="fab fa-ethereum text-white text-2xl"></i>
             </div>
-            <p class="text-sm text-gray-500 uppercase tracking-widest">
-                // Ghost_eSIM Network © 2025 <br>
-                // All connections encrypted
-            </p>
+            <p class="text-sm text-gray-500 uppercase tracking-widest">// Ghost_eSIM Network © 2025 <br>// All connections encrypted</p>
         </div>
     </footer>
 
-    <!-- Payment Modal (Retro Style) -->
+    <!-- Payment Modal -->
     <div id="paymentModal" class="fixed inset-0 z-[99] hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closePaymentModal()"></div>
-        
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
             <div class="bg-vintageWhite border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
                 <div class="flex justify-between items-center mb-6 border-b-2 border-black pb-2">
                     <h3 class="font-mono font-bold uppercase text-lg">> Payment_Gateway</h3>
                     <button onclick="closePaymentModal()" class="hover:text-retroOrange text-2xl">&times;</button>
                 </div>
-
                 <div class="mb-6 text-center font-mono">
                     <p class="text-sm text-gray-500 mb-1">SELECTED_MODULE:</p>
                     <p class="text-xl font-bold" id="modalPlanName">UNKNOWN</p>
                 </div>
-
                 <div class="space-y-3 font-mono text-sm">
                     <button class="w-full border-2 border-black p-3 hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
                         <span class="flex items-center gap-2"><i class="fab fa-bitcoin"></i> BITCOIN</span>
@@ -411,131 +287,58 @@
         </div>
     </div>
 
-    <!-- Matrix Rain & Boot Sequence Scripts -->
-    <style>
-        /* Глитч анимация текста */
-        .glitch-active {
-            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-            color: #ffffff;
-            text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
-        }
-        @keyframes glitch-skew {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
-
-        /* Бегущий код вверх */
-        @keyframes scrollUp {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
-        .scrolling-code {
-            animation: scrollUp 20s linear infinite;
-        }
-        .scrolling-code-fast {
-            animation: scrollUp 10s linear infinite;
-        }
-    </style>
-
     <script>
-        // Генератор мусорного кода (Matrix Rain)
+        // Matrix & Boot Logic
         function generateRandomHex(length) {
-            let result = '';
-            const characters = '0123456789ABCDEF';
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-                if (i % 2 === 1) result += ' '; // Пробел каждые 2 символа
-            }
+            let result = ''; const characters = '0123456789ABCDEF';
+            for (let i = 0; i < length; i++) { result += characters.charAt(Math.floor(Math.random() * characters.length)); if (i % 2 === 1) result += ' '; }
             return result;
         }
-
         function generateSystemLog(lines) {
-            const logs = [
-                "CONNECTING...", "HANDSHAKE_SYN", "ACK_RECEIVED", "DECRYPT_KEY", 
-                "BUFFER_OVERFLOW", "TRACING_ROUTE", "PROXY_CHAIN", "BYPASS_FIREWALL",
-                "UPLOADING_PACKET", "0x4F22_ADDR", "KERNEL_PANIC", "MOUNT_VOL_2",
-                "PING_SUCCESS", "ETH_0: UP", "WLAN_1: UP", "IP_MASK_HIDDEN"
-            ];
+            const logs = ["CONNECTING...", "HANDSHAKE_SYN", "ACK_RECEIVED", "DECRYPT_KEY", "BUFFER_OVERFLOW", "TRACING_ROUTE", "PROXY_CHAIN", "BYPASS_FIREWALL", "UPLOADING_PACKET", "0x4F22_ADDR", "KERNEL_PANIC", "MOUNT_VOL_2", "PING_SUCCESS", "ETH_0: UP", "WLAN_1: UP", "IP_MASK_HIDDEN"];
             let result = '';
-            for(let i=0; i<lines; i++) {
-                result += logs[Math.floor(Math.random() * logs.length)] + '<br>';
-                result += `<span style="opacity:0.5; font-size:8px">${generateRandomHex(12)}</span><br>`;
-            }
+            for(let i=0; i<lines; i++) { result += logs[Math.floor(Math.random() * logs.length)] + '<br>'; result += `<span style="opacity:0.5; font-size:8px">${generateRandomHex(12)}</span><br>`; }
             return result;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Запускаем Matrix Rain
-            const col1 = document.getElementById('col1');
-            const col2 = document.getElementById('col2');
-            const col3 = document.getElementById('col3');
-
-            // Чтобы анимация была бесконечной, мы дублируем контент дважды
-            if(col1 && col2 && col3) {
-                col1.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
-                col2.innerHTML = `<div class="scrolling-code-fast">${generateSystemLog(30)}</div>`;
-                col3.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
+            // Matrix only on desktop
+            if(window.innerWidth > 768) {
+                const col1 = document.getElementById('col1'); const col2 = document.getElementById('col2'); const col3 = document.getElementById('col3');
+                if(col1 && col2 && col3) {
+                    col1.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
+                    col2.innerHTML = `<div class="scrolling-code-fast">${generateSystemLog(30)}</div>`;
+                    col3.innerHTML = `<div class="scrolling-code">${generateRandomHex(400)}</div>`;
+                }
             }
 
-            // 2. Boot Sequence (Терминал статуса)
             const statusText = document.getElementById('statusText');
             const statusDot = document.getElementById('statusDot');
-            
             if (!statusText) return;
 
-            const bootSteps = [
-                { text: "> BIOS_CHECK...", delay: 200 },
-                { text: "> LOAD_KERNEL", delay: 800 },
-                { text: "> MOUNT_VIRTUAL_DRIVE", delay: 1500 },
-                { text: "> DECRYPTING_KEYS...", delay: 2200 },
-                { text: "> ESTABLISHING_P2P...", delay: 3000 },
-                { text: "STATUS: ONLINE", delay: 3800, final: true }
-            ];
-
+            const bootSteps = [{ text: "> BIOS_CHECK...", delay: 200 }, { text: "> LOAD_KERNEL", delay: 800 }, { text: "> MOUNT_VIRTUAL_DRIVE", delay: 1500 }, { text: "> DECRYPTING_KEYS...", delay: 2200 }, { text: "> ESTABLISHING_P2P...", delay: 3000 }, { text: "STATUS: ONLINE", delay: 3800, final: true }];
             let currentStep = 0;
 
             function runBoot() {
                 if (currentStep >= bootSteps.length) return;
                 const step = bootSteps[currentStep];
-                
                 setTimeout(() => {
-                    statusText.innerText = step.text;
-                    statusText.setAttribute('data-text', step.text); 
-
+                    statusText.innerText = step.text; statusText.setAttribute('data-text', step.text);
                     if (step.final) {
                         statusText.classList.add('glitch-active');
-                        statusDot.classList.remove('bg-red-500');
-                        statusDot.classList.add('bg-green-500', 'animate-pulse', 'shadow-[0_0_10px_#00ff00]');
+                        statusDot.classList.remove('bg-red-500'); statusDot.classList.add('bg-green-500', 'animate-pulse', 'shadow-[0_0_10px_#00ff00]');
                         setTimeout(() => statusText.classList.remove('glitch-active'), 1000);
                     } else {
-                        currentStep++;
-                        runBoot();
+                        currentStep++; runBoot();
                     }
                 }, step.delay - (currentStep > 0 ? bootSteps[currentStep-1].delay : 0));
             }
-
             runBoot();
         });
-        
-        // Modal Logic
-        function openPaymentModal(planName) {
-            document.getElementById('paymentModal').classList.remove('hidden');
-            document.getElementById('modalPlanName').innerText = planName;
-            document.body.style.overflow = 'hidden';
-        }
 
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closePaymentModal();
-        });
+        function openPaymentModal(planName) { document.getElementById('paymentModal').classList.remove('hidden'); document.getElementById('modalPlanName').innerText = planName; document.body.style.overflow = 'hidden'; }
+        function closePaymentModal() { document.getElementById('paymentModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePaymentModal(); });
     </script>
-
 </body>
 </html>
