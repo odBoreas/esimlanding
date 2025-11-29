@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous eSIM | Pay with Crypto</title>
+    <meta name="description" content="Global mobile data without KYC or registration. Anonymous eSIM with cryptocurrency payment.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0f0f0f",
+                        accent: "#00ff88",
+                        dark: "#1a1a1a",
+                        light: "#f0f0f0"
+                    },
+                    animation: {
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        'pulse-glow': {
+                            '0%, 100%': { 'box-shadow': '0 0 5px #00ff88' },
+                            '50%': { 'box-shadow': '0 0 20px #00ff88, 0 0 30px #00ff88' }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-primary text-white font-sans">
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full bg-primary/90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-accent">eSIM</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Anonymous eSIM.<br>
+                    <span class="text-accent">Pay with Crypto.</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Global mobile data without KYC or registration.
+                </p>
+                <button onclick="scrollToPlan()" class="bg-accent text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-accent/90 transition-all duration-300 animate-pulse-glow">
+                    Get eSIM
+                </button>
+            </div>
+            
+            <!-- Animated iPhone Mockup -->
+            <div class="relative mx-auto max-w-md animate-float">
+                <div class="bg-dark rounded-[3rem] p-6 border-2 border-gray-700 shadow-2xl">
+                    <div class="bg-black rounded-[2rem] p-2">
+                        <div class="bg-gray-900 rounded-[1.5rem] h-80 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-accent rounded-full mx-auto mb-4 animate-pulse"></div>
+                        <p class="text-accent font-semibold">Installing eSIM...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Section -->
+    <section id="plan" class="py-16 px-4 bg-dark">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    One Plan. <span class="text-accent">99 Countries.</span>
+                </h2>
+                <p class="text-gray-300 text-lg mb-8">
+                    Instant activation. No personal data.
+                </p>
+                
+                <!-- Countries Table -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+                    <div class="bg-primary/50 p-4 rounded-lg text-center">
+                    <div class="text-accent font-bold">Europe</div>
+                    <div class="text-sm text-gray-400">45 countries</div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+                    <div class="bg-primary/50 p-4 rounded-lg text-center">
+                    <div class="text-accent font-bold">Asia</div>
+                    <div class="text-sm text-gray-400">28 countries</div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+                    <div class="bg-primary/50 p-4 rounded-lg text-center">
+                    <div class="text-accent font-bold">Americas</div>
+                    <div class="text-sm text-gray-400">26 countries</div>
+                </div>
+                
+                <button onclick="openPaymentModal()" class="bg-accent text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-accent/90 transition-all duration-300 animate-pulse-glow">
+                    Buy Now - $29
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Section -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                    Manage eSIM in our <span class="text-accent">App</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://picsum.photos/300/600?random=1" alt="App interface screenshot" class="rounded-2xl mx-auto shadow-2xl" loading="lazy">
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300">
+                            <div class="flex items-center gap-2">
+                                <i class="fab fa-apple text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-xs text-gray-400">Download on the</div>
+                                    <div class="font-bold">App Store</div>
+                                </div>
+                            </button>
+                            <button class="bg-dark border border-gray-700 px-6 py-3 rounded-lg hover:border-accent transition-all duration-300">
+                            <div class="flex items-center gap-2">
+                                <i class="fab fa-google-play text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-xs text-gray-400">Get it on</div>
+                                    <div class="font-bold">Google Play</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-12 px-4 border-t border-gray-800">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <div class="bg-primary/50 p-3 rounded-lg">
+                        <i class="fab fa-bitcoin text-accent text-2xl"></i>
+                    </div>
+                    <div class="bg-primary/50 p-3 rounded-lg">
+                        <i class="fas fa-coins text-accent text-2xl"></i>
+                    </div>
+                    <div class="bg-primary/50 p-3 rounded-lg">
+                        <i class="fab fa-ethereum text-accent text-2xl"></i>
+                    </div>
+                    <div class="bg-primary/50 p-3 rounded-lg">
+                        <i class="fas fa-wallet text-accent text-2xl"></i>
+                    </div>
+                </div>
+                <div class="flex justify-center space-x-6 text-sm text-gray-400">
+                    <a href="#" class="hover:text-accent transition-colors">Terms</a>
+                    <a href="#" class="hover:text-accent transition-colors">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-dark rounded-2xl p-6 max-w-md w-full border border-gray-700">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-accent">Complete Payment</h3>
+                        <button onclick="closePaymentModal()" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="text-center mb-6">
+                        <div class="text-3xl font-bold text-accent">$29</div>
+                        <p class="text-gray-400">One-time payment</p>
+                    </div>
+                    
+                    <!-- Payment Methods -->
+                    <div class="space-y-3 mb-6">
+                        <div class="text-sm text-gray-400">Payment Methods:</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="selectPaymentMethod('binance')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <i class="fas fa-wallet text-accent"></i>
+                            <span>Binance Pay</span>
+                        </button>
+                        <button onclick="selectPaymentMethod('usdt')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <i class="fas fa-coins text-accent"></i>
+                            <span>USDT</span>
+                        </button>
+                        <button onclick="selectPaymentMethod('btc')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <i class="fab fa-bitcoin text-accent"></i>
+                            <span>BTC</span>
+                        </button>
+                        <button onclick="selectPaymentMethod('eth')" class="bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                            <i class="fab fa-ethereum text-accent"></i>
+                            <span>ETH</span>
+                        </button>
+                    </div>
+                    
+                    <!-- QR Code Section (Initially Hidden) -->
+                    <div id="qrSection" class="hidden">
+                        <div class="text-center mb-6">
+                            <div class="bg-white p-4 rounded-lg inline-block">
+                                <img src="https://picsum.photos/200?random=2" alt="eSIM QR Code" class="w-48 h-48">
+                            </div>
+                            <p class="text-gray-400 mt-4">Scan to install eSIM</p>
+                        </div>
+                        
+                        <!-- QR Actions -->
+                        <div class="flex space-x-3 mb-6">
+                            <button onclick="shareQR()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                                <i class="fas fa-share-alt text-accent"></i>
+                                <span>Share QR</span>
+                            </button>
+                            <button onclick="copyActivationData()" class="flex-1 bg-primary/50 p-3 rounded-lg border border-gray-700 hover:border-accent transition-all">
+                                <i class="fas fa-copy text-accent"></i>
+                                <span>Copy Data</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Manual Setup -->
+                        <div class="bg-primary/30 p-4 rounded-lg border border-gray-600">
+                            <div class="text-sm text-gray-400 mb-2">Manual Setup:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>SM-DP+ Address:</span>
+                                    <span class="text-accent">rsp.thruton.com</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Activation Code:</span>
+                                    <span class="text-accent">QR-NME-98_WE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pay Button -->
+                    <button id="payButton" onclick="processPayment()" class="w-full bg-accent text-primary py-3 rounded-lg font-bold hover:bg-accent/90 transition-all duration-300 animate-pulse-glow">
+                        Pay with Crypto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define data
+        const paymentMethods = [
+            { "id": "binance", "name": "Binance Pay", "icon": "fa-wallet" },
+            { "id": "usdt", "name": "USDT", "icon": "fa-coins" },
+            { "id": "btc", "name": "BTC", "icon": "fa-bitcoin" },
+            { "id": "eth", "name": "ETH", "icon": "fa-ethereum" }
+        ];
+        
+        const manualSetupData = {
+            "smdp": "rsp.thruton.com",
+            "activationCode": "QR-NME-98_WE"
+        };
+        
+        let selectedPaymentMethod = null;
+        
+        // Navigation functions
+        function scrollToPlan() {
+            document.getElementById('plan').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            resetPaymentModal();
+        }
+        
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('[onclick^="selectPaymentMethod"]').forEach(btn => {
+                btn.classList.remove('border-accent', 'bg-accent/20');
+                btn.classList.add('border-gray-700');
+            });
+            
+            const selectedBtn = document.querySelector(`[onclick="selectPaymentMethod('${method}')"]`);
+            selectedBtn.classList.add('border-accent', 'bg-accent/20');
+        }
+        
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                alert("Please select a payment method");
+                return;
+            }
+            
+            // Show QR code section
+            document.getElementById('qrSection').classList.remove('hidden');
+            document.getElementById('payButton').classList.add('hidden');
+        }
+        
+        function shareQR() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Anonymous eSIM',
+                    text: 'Your eSIM activation QR code',
+                    url: window.location.href
+                });
+            } else {
+                alert("QR code link copied to clipboard");
+            }
+        }
+        
+        function copyActivationData() {
+            const data = `SM-DP+ Address: ${manualSetupData.smdp}\nActivation Code: ${manualSetupData.activationCode}";
+            navigator.clipboard.writeText(data).then(() => {
+                alert("Activation data copied to clipboard");
+            });
+        }
+        
+        function resetPaymentModal() {
+            selectedPaymentMethod = null;
+            document.getElementById('qrSection').classList.add('hidden');
+            document.getElementById('payButton').classList.remove('hidden');
+            document.querySelectorAll('[onclick^="selectPaymentMethod"]').forEach(btn => {
+                btn.classList.remove('border-accent', 'bg-accent/20');
+                btn.classList.add('border-gray-700');
+            });
+        }
+        
+        // Close modal on outside click
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !document.getElementById('paymentModal').classList.contains('hidden')) {
+                closePaymentModal();
+            }
+        });
+    </script>
+</body>
+</html>
